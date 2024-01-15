@@ -1,5 +1,6 @@
 package br.com.thalison.crudMongodb.resources;
 
+import br.com.thalison.crudMongodb.domain.Post;
 import br.com.thalison.crudMongodb.domain.User;
 import br.com.thalison.crudMongodb.dto.UserDTO;
 import br.com.thalison.crudMongodb.service.UserService;
@@ -53,6 +54,12 @@ public class UserResource {
         userobj.setId(id);
         userobj = userService.update(userobj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/findById/{id}/posts")
+    public ResponseEntity<List<Post>> findPost(@PathVariable String id) {
+        User userobj = userService.findById(id);
+        return ResponseEntity.ok().body(userobj.getListPosts());
     }
 
 

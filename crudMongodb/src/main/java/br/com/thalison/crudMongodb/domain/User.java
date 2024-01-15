@@ -22,7 +22,7 @@ public class User implements Serializable {
     private String email;
 
 
-    @DBRef(lazy = true) // Sem o dbref irá apresentar todo o objeto do post quando requisitado
+   //@DBRef // Sem o dbref irá apresentar todo o objeto do post quando requisitado
     private List<Post> listPosts = new ArrayList<>();
 
     public  User(){
