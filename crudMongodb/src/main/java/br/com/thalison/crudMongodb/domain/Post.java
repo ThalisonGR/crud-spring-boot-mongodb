@@ -1,10 +1,13 @@
 package br.com.thalison.crudMongodb.domain;
 
 import br.com.thalison.crudMongodb.dto.AuthorDTO;
+import br.com.thalison.crudMongodb.dto.CommentDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -17,6 +20,17 @@ public class Post {
     private String body;
 
     private AuthorDTO author;
+
+    private List<CommentDTO> comment = new ArrayList<>();
+
+    public List<CommentDTO> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<CommentDTO> comment) {
+        this.comment = comment;
+    }
+
     public  Post(){
 
     }

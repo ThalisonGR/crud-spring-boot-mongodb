@@ -3,6 +3,7 @@ package br.com.thalison.crudMongodb.config;
 import br.com.thalison.crudMongodb.domain.Post;
 import br.com.thalison.crudMongodb.domain.User;
 import br.com.thalison.crudMongodb.dto.AuthorDTO;
+import br.com.thalison.crudMongodb.dto.CommentDTO;
 import br.com.thalison.crudMongodb.repository.PostRepository;
 import br.com.thalison.crudMongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class Instantiation implements CommandLineRunner {
 
         Post post = new Post(null,simpleDateFormat.parse("21/03/2023"),"Pariu viagem", "Vou viajar", new AuthorDTO(maria)  );
         Post post2 = new Post(null,simpleDateFormat.parse("25/03/2023"),"Viagem", "Muito bom" , new AuthorDTO(alex));
+
+        CommentDTO c1 = new CommentDTO("Olá Brasil",simpleDateFormat.parse("18/08/2000"),new AuthorDTO(maria));
+        CommentDTO c2 = new CommentDTO("Olá Argentina",simpleDateFormat.parse("18/08/2000"),new AuthorDTO(alex));
+
+        post.getComment().add(c1);
+        post2.getComment().add(c2);
 
         postRepository.saveAll(Arrays.asList(post , post2));
 
