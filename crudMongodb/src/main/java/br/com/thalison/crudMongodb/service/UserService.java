@@ -1,6 +1,7 @@
 package br.com.thalison.crudMongodb.service;
 
 import br.com.thalison.crudMongodb.domain.User;
+import br.com.thalison.crudMongodb.dto.UserDTO;
 import br.com.thalison.crudMongodb.repository.UserRepository;
 import br.com.thalison.crudMongodb.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,13 @@ public class UserService {
            throw new ObjectNotFoundException("Objeto não encontrado");
         }
         return user;
+    }
+
+    public User insert (User user){
+        return  userRepository.insert(user);
+    }
+
+    public User fromDTO(UserDTO objectdto){
+        return new User(objectdto.getId(), objectdto.getName(), objectdto.getEmail());
     }
 }
