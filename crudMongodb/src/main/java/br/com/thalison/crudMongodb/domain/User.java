@@ -1,9 +1,12 @@
 package br.com.thalison.crudMongodb.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -17,6 +20,10 @@ public class User implements Serializable {
     private String id;
     private String name;
     private String email;
+
+
+    @DBRef(lazy = true) // Sem o dbref irá apresentar todo o objeto do post quando requisitado
+    private List<Post> listPosts = new ArrayList<>();
 
     public  User(){
     }
@@ -49,6 +56,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Post> getListPosts() {
+        return listPosts;
+    }
+
+    public void setListPosts(List<Post> listPosts) {
+        this.listPosts = listPosts;
     }
 
     @Override
