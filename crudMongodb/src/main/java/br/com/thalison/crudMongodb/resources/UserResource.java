@@ -1,6 +1,7 @@
 package br.com.thalison.crudMongodb.resources;
 
 import br.com.thalison.crudMongodb.domain.User;
+import br.com.thalison.crudMongodb.dto.UserDTO;
 import br.com.thalison.crudMongodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users") //geralmente o nome do metodo sempre no pluras "users"
@@ -18,9 +20,11 @@ public class UserResource {
     private UserService userService;
 
     @GetMapping(value = "/findAll")
-    public ResponseEntity<List<User>> findAll() {
-        List<User> users = userService.findAll();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<User> listaUsers = userService.findAll();
+
+        List<UserDTO> listaDTO = listaUsers.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listaDTO);
     }
 
 }
